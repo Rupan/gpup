@@ -2,6 +2,7 @@ AC_INIT(gpup, 0.3.0, g_85_g@yahoo.com)
 
 AM_INIT_AUTOMAKE([1.10.0 foreign subdir-objects dist-bzip2])
 AM_CONFIG_HEADER(src/config.h)
+AC_CONFIG_MACRO_DIR([m4])
 
 # Add configure switches.
 AC_ARG_ENABLE(debug, [  --enable-debug          Enable debugging [default=no]], gpup_debug=1, gpup_debug=0 )

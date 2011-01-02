@@ -22,7 +22,7 @@
 #ifndef TYPEDEFS_H__
 #define TYPEDEFS_H__
 
-
+#include <inttypes.h>
 
 typedef  uint8_t  u8;
 typedef   int8_t  s8;

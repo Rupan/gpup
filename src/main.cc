@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <stdlib.h>
 #include <iostream>
 
 #include "core/PS3PupProcessor.hh"
@@ -49,12 +50,21 @@ int main(int argc, char *argv[])
 	string filename(argv[2]);
 
 	PS3PupProcessor processor;
-	processor.AddFilenameForType(0x100, string("version.txt"));
-	processor.AddFilenameForType(0x101, string("dots.txt"));
+	/* Contains the version as a string terminated by EOF */
+	processor.AddFilenameForType(0x100, string("ps3version.txt"));
+	/* XML strings to be displayed during installation */
+	processor.AddFilenameForType(0x101, string("license.xml"));
+	/* Found only in promotion package, contained only one byte: 30 ("0" in ASCII). */
 	processor.AddFilenameForType(0x102, string("promo.txt"));
-	processor.AddFilenameForType(0x200, string("updater.sce"));
+	/* console_Type.txt: 0000 its for retail firmwares (CEX), 0100 for debug firmwares (DEX), 00300 for shop firmwares(SEX???) */
+	processor.AddFilenameForType(0x103, string("console_Type.txt"));
+	/* An SELF executable or nothing */
+	processor.AddFilenameForType(0x200, string("ps3swu.self"));
+	/* Contains XMB configurations files when FW version is less than 1.50 */
 	processor.AddFilenameForType(0x201, string("vsh.tar"));
-	processor.AddFilenameForType(0x202, string("msg.xml"));
+	/* Contains just "..." in ASCII, in 2.30 it contains "msg_updater" XML strings. */
+	processor.AddFilenameForType(0x202, string("dots.txt"));
+	/* firmware files */
 	processor.AddFilenameForType(0x300, string("update.tar"));
 	
 	if(command == "x")
@@ -82,7 +92,7 @@ int main(int argc, char *argv[])
 
 void print_usage(char *arg_name)
 {
-	cout << "usage: " << arg_name << "<COMMAND> <FILENAME.PUP>" << endl;
+	cout << "usage: " << arg_name << " <COMMAND> <FILENAME.PUP>" << endl;
 	cout << "where COMMAND is:" << endl;
 	cout << "    x - extract firmware" << endl;
 	cout << "    c - create firmware" << endl;

@@ -1,0 +1,11 @@
+More info about the PUP format here:
+http://ps3dev.wikispaces.com/Update+Package
+
+un_pup.c: Another PUP unpacker (see URL above)
+
+jig_key.c: generates individual jig keys
+  This depends on Brian Gladman's SHA code.
+  It contains the jig master key good until at least firmware 3.55.
+
+depkg.c: decrypts PKG files from PS3UPDAT.PUP
+  e.g. CORE_OS_PACKAGE from update.tar
