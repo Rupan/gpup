@@ -9,3 +9,32 @@ jig_key.c: generates individual jig keys
 
 depkg.c: decrypts PKG files from PS3UPDAT.PUP
   e.g. CORE_OS_PACKAGE from update.tar
+
+-----------------------------------------------------------------------------------------------------------
+
+Some level 2 loader keys have leaked, which allows modification and re-signing.
+Details as to how they work are below, but a tool exists which they can be used with:
+  https://github.com/ooPo/ps3sdk
+
+-----------------------------------------------------------------------------------------------------------
+
+Lv2ldr keys for firmware 3.40, 3.41, and 3.42:
+erk(12AB0): 57 5B 0A 6C 4B 4F 27 60 A0 3F E4 18 9E BA F4 D9 47 27 9F D9 82 B1 40 70 34 90 98 B0 8F F9 2C 10
+riv(12AD0): 41 1C B1 8F 46 0C E5 0C AF 2C 42 6D 8F 0D 93 C8
+Thanks Geohot.
+
+-----------------------------------------------------------------------------------------------------------
+
+Lv2ldr keys for any firmware lower than 3.40:
+
+erk(XXXXX): 94 30 3F 69 51 35 72 AB 5A E1 7C 8C 2A 18 39 D2 C2 4C 28 F6 53 89 D3 BB B1 18 94 CE 23 E0 79 8F
+riv(XXXXX): 97 69 BF D1 87 B9 09 90 AE 5F EA 4E 11 0B 9C F5
+
+Decrypts all the External lv2 versions from pre 1.00 to anything below 3.40.
+Use the algorithm available here: https://ps3wiki.lan.st/index.php/Self_Crypto
+and here: https://ps3wiki.lan.st/index.php/SELF_File_Format_and_Decryption
+
+Credits:
+Mathieulh, RichDevX, Graf_Chokolo, N_D_T, TitanMKD. (all from a brand new, yet unnamed team.)
+Maybe more to come.
+btw those keys also happen to decrypt the ps2_emu binaries if anyone cares.
